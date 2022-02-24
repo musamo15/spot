@@ -12,7 +12,7 @@ export default class LoginPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-        email: '', // user enterd email
+        email: '', // user entered email
         password: '', // user entered password
         persist: false, // remember me auth persistence
         pwdField: 'password', // password field entry type
@@ -50,7 +50,7 @@ export default class LoginPage extends Component {
   render() {
     return (
       <div className='login-card'>
-        <div className='text-center'>
+        <div className='mb-3 text-center'>
           <h1>SPOT</h1>
         </div>
         <Form>
@@ -80,7 +80,7 @@ export default class LoginPage extends Component {
           <Form.Group className='mb-3'>
             <Form.Check type='checkbox'
               label='Remember me'
-              onClick={evt => this.updatePersist(evt)}/>
+              onClick={e => this.updatePersist(e)}/>
           </Form.Group>
           <div className='d-grid gap-2'>
             <Button variant='primary'>Login</Button>
