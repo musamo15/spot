@@ -14,8 +14,8 @@ export default class LoginPage extends Component {
     this.state = {
         email: '', // user entered email
         password: '', // user entered password
-        persist: false, // remember me auth persistence
-        pwdField: 'password', // password field entry type
+        persist: false, // auth persistence (remember me)
+        pwdField: 'password', // password text entry type
     };
   }
 

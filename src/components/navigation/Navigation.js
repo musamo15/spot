@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
+import { withAuth0 } from '@auth0/auth0-react';
 
-import Form from 'react-bootstrap/Form'
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import NavDropdown from 'react-bootstrap/NavDropdown';
-import Container from 'react-bootstrap/Container';
 
-export default class Navigation extends Component {
+class Navigation extends Component {
 
   constructor(props) {
     super(props);
@@ -15,27 +14,38 @@ export default class Navigation extends Component {
     };
   }
 
+  renderAuthOptions() {
+    if (this.props.auth0.isAuthenticated) {
+      console.log(this.props.auth0.user.sub);
+      return(
+        <Nav className='ms-auto'>
+          <NavDropdown title={this.props.auth0.user.name} id='collapsible-nav-dropdown' align='end'>
+            <NavDropdown.Item onClick={() => this.props.auth0.logout({ returnTo: window.location.origin })}>Logout</NavDropdown.Item>
+          </NavDropdown>
+        </Nav>
+      );
+    } else {
+      return(
+        <Nav className='ms-auto'>
+          <Nav.Link onClick={() => this.props.auth0.loginWithRedirect({ 'screen_hint': 'signup' })}>Sign Up</Nav.Link>
+          <Nav.Link onClick={this.props.auth0.loginWithRedirect}>Login</Nav.Link>
+        </Nav>
+      );
+    }
+  }
+
   render() {
     return(
       <Navbar collapseOnSelect className='px-3' expand='lg' sticky='top' bg='white'>
         <Navbar.Brand href='/'>SPOT</Navbar.Brand>
         <Navbar.Toggle/>
         <Navbar.Collapse id='responsive-navbar-nav'>
-          <Nav className='ms-auto'>
-            <Nav.Link href='#pricing'>Pricing</Nav.Link>
-            <NavDropdown title='Dropdown' id='collasible-nav-dropdown'>
-              <NavDropdown.Item href='#action/3.1'>Action</NavDropdown.Item>
-              <NavDropdown.Item href='#action/3.2'>Another action</NavDropdown.Item>
-              <NavDropdown.Item href='#action/3.3'>Something</NavDropdown.Item>
-              <NavDropdown.Divider />
-              <NavDropdown.Item href='#action/3.4'>Separated link</NavDropdown.Item>
-            </NavDropdown>
-            <Nav.Link href='register'>Sign Up</Nav.Link>
-            <Nav.Link href='login'>Login</Nav.Link>
-          </Nav>
+          {this.renderAuthOptions()}
         </Navbar.Collapse>
       </Navbar>
     );
   }
 
 }
+
+export default withAuth0(Navigation);
