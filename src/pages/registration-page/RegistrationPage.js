@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-//import { CheckCircleFill } from 'react-bootstrap-icons';
+// import { CheckCircleFill } from 'react-bootstrap-icons';
 
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Popover from 'react-bootstrap/Popover';
 
+import { signupAndLogin } from 'src/utilities/authentication/auth.js';
 import { withRouter } from 'src/utilities/routing/withRouter.js';
 
 import './RegistrationPage.css';
@@ -70,11 +71,19 @@ class Registration extends Component {
     });
   }
 
-  processSubmit() {
+  handleRegistration() {
     let passwordValid = this.passwordValid();
     let passwordsMatch = this.passwordsMatch();
+
     if (passwordValid && passwordsMatch) {
-      // create user
+      signupAndLogin({
+        email: this.state.email.trim(),
+        password: this.state.password.trim(),
+        user_metadata: {
+          first_name: this.state.firstName.trim(),
+          last_name: this.state.lastName.trim()
+        }
+      });
     } else {
       this.setState({
         invalidPassword: !passwordValid,
@@ -124,7 +133,7 @@ class Registration extends Component {
     return(this.state.password === this.state.confirmPassword);
   }
 
-  renderPopover() {
+  renderPwdReqsPopover() {
     return(
       <Popover>
         <Popover.Body>
@@ -133,26 +142,31 @@ class Registration extends Component {
             <Form.Group className='mb-1'>
               <Form.Check type='checkbox'
                 label='One uppercase character'
+                readOnly={true}
                 checked={this.state.passwordContainsUppercase}/>
             </Form.Group>
             <Form.Group className='mb-1'>
               <Form.Check type='checkbox'
                 label='One lowercase character'
+                readOnly={true}
                 checked={this.state.passwordContainsLowercase}/>
             </Form.Group>
             <Form.Group className='mb-1'>
               <Form.Check type='checkbox'
                 label='One number'
+                readOnly={true}
                 checked={this.state.passwordContainsNumber}/>
             </Form.Group>
             <Form.Group className='mb-1'>
               <Form.Check type='checkbox'
                 label='One special character'
+                readOnly={true}
                 checked={this.state.passwordContainsSpecial}/>
             </Form.Group>
             <Form.Group className='mb-1'>
               <Form.Check type='checkbox'
                 label='At least 8 characters'
+                readOnly={true}
                 checked={this.state.passwordLengthOkay}/>
             </Form.Group>
           </div>
@@ -194,7 +208,7 @@ class Registration extends Component {
           <Form.Label>Password</Form.Label>
           <OverlayTrigger trigger='focus'
             placement='right-end'
-            overlay={this.renderPopover()}>
+            overlay={this.renderPwdReqsPopover()}>
             <Form.Control type='password'
               isInvalid={this.state.invalidPassword}
               placeholder='Enter new password'
@@ -220,7 +234,7 @@ class Registration extends Component {
             disabled={!(this.state.firstName && this.state.lastName &&
               this.state.email && this.state.password &&
               this.state.confirmPassword)}
-            onClick={() => this.processSubmit()}>
+            onClick={() => this.handleRegistration()}>
             Register
           </Button>
         </div>
