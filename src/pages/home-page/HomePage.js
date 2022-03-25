@@ -11,13 +11,6 @@ import './HomePage.css';
 
 class HomePage extends Component {
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      someState: null
-    };
-  }
-
   redirect(path) {
     this.props.navigate(path);
   }

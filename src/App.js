@@ -7,6 +7,8 @@ import ErrorPage from 'src/pages/error-page/ErrorPage';
 import HomePage from 'src/pages/home-page/HomePage';
 import LoginPage from 'src/pages/login-page/LoginPage';
 import RegistrationPage from 'src/pages/registration-page/RegistrationPage';
+import ListingPage from 'src/pages/listing-page/ListingPage';
+import CreateListingPage from 'src/pages/create-listing-page/CreateListingPage'
 
 export default class App extends Component {
 
@@ -18,6 +20,8 @@ export default class App extends Component {
           <Route path='/authorize' element={<AuthPage/>}/>
           <Route path='/login' element={<LoginPage/>}/>
           <Route path='/register' element={<RegistrationPage/>}/>
+          <Route path='/listing' element={<ListingPage/>}/>
+          <Route path='/create-listing' element={<CreateListingPage/>}/>
           <Route path='*' element={<ErrorPage/>}/>
         </Routes>
       </BrowserRouter>
