@@ -15,32 +15,33 @@ class Navigation extends Component {
 
   renderAuthOptions() {
     if (isAuthenticated()) {
-      return(
+      return (
         <Nav className='ms-auto'>
           <NavDropdown title={getUser().nickname} id='collapsible-nav-dropdown' align='end'>
+            <NavDropdown.Item href='create-listing?category=generic&mode=create'>Create Listing</NavDropdown.Item>
             <NavDropdown.Item onClick={() => logout()}>Logout</NavDropdown.Item>
           </NavDropdown>
         </Nav>
       );
     } else {
-      return(
+      return (
         <Nav className='ms-auto'>
-          <Nav.Link onClick={() => this.redirect('/register')}>Sign Up</Nav.Link>
-          <Nav.Link onClick={() => this.redirect('/login')}>Login</Nav.Link>
+          <Nav.Link href='/register'>Sign Up</Nav.Link>
+          <Nav.Link href='/login'>Login</Nav.Link>
         </Nav>
       );
     }
   }
 
   render() {
-    return(
+    return (
       <Navbar collapseOnSelect className='px-3' expand='lg' sticky='top' bg='white'>
         <Navbar.Brand href='/'>SPOT</Navbar.Brand>
-        <Navbar.Toggle/>
+        <Navbar.Toggle />
         <Navbar.Collapse id='responsive-navbar-nav'>
-          {this.renderAuthOptions()}
-        </Navbar.Collapse>
-      </Navbar>
+    { this.renderAuthOptions() }
+        </Navbar.Collapse >
+      </Navbar >
     );
   }
 

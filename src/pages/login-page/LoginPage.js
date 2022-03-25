@@ -15,9 +15,9 @@ class LoginPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-        email: '', // user entered email
-        password: '', // user entered password
-        pwdField: 'password', // password text entry type
+      email: '', // user entered email
+      password: '', // user entered password
+      pwdField: 'password', // password text entry type
     };
   }
 
@@ -61,7 +61,7 @@ class LoginPage extends Component {
             <Form.Control
               type='email'
               placeholder='Enter email'
-              onChange={e => this.updateEmail(e)}/>
+              onChange={e => this.updateEmail(e)} />
           </Form.Group>
           <Form.Group className='mb-3'>
             <Form.Label>Password</Form.Label>
@@ -69,13 +69,13 @@ class LoginPage extends Component {
               <Form.Control
                 type={this.state.pwdField}
                 placeholder='Enter password'
-                onChange={e => this.updatePassword(e)}/>
+                onChange={e => this.updatePassword(e)} />
               <Button
                 variant='secondary'
                 disabled={!this.state.password}
                 onClick={e => this.showHidePassword(e)}>
                 {this.state.pwdField === 'password' ?
-                  <EyeSlashFill/> : <EyeFill/>}
+                  <EyeSlashFill /> : <EyeFill />}
               </Button>
             </InputGroup>
           </Form.Group>
@@ -90,7 +90,7 @@ class LoginPage extends Component {
             Forgot Password?
           </a>
         </div>
-        <hr/>
+        <hr />
         <div className='d-grid gap-2'>
           <Button variant='success' onClick={() => this.redirect('/register')}>
             Register
