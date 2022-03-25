@@ -5,53 +5,55 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import InputGroup from 'react-bootstrap/InputGroup';
 
+import { login } from 'src/utilities/authentication/auth.js';
+import { withRouter } from 'src/utilities/routing/withRouter.js';
+
 import './LoginPage.css';
 
-export default class LoginPage extends Component {
+class LoginPage extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
         email: '', // user entered email
         password: '', // user entered password
-        persist: false, // auth persistence (remember me)
         pwdField: 'password', // password text entry type
     };
   }
 
-  // update the email field internal state
   updateEmail(e) {
     this.setState({
       email: e.target.value
     });
   }
 
-  // update the password field internal state
   updatePassword(e) {
     this.setState({
       password: e.target.value
     });
   }
 
-  // update the persist field (remember me) interal state
-  updatePersist(e) {
-    this.setState({
-      persist: !this.state.persist
-    });
-  }
-
-  // show or hide the password field entry contents
   showHidePassword(e) {
     this.setState({
       pwdField: this.state.pwdField === 'text' ? 'password' : 'text'
     });
   }
 
+  redirect(path) {
+    this.props.navigate(path);
+  }
+
+  handleLogin() {
+    login(this.state.email.trim(), this.state.password.trim());
+  }
+
   render() {
     return (
       <div className='login-card'>
         <div className='mb-3 text-center'>
-          <h1>SPOT</h1>
+          <h1 style={{ cursor: 'pointer' }} onClick={() => this.redirect('/')}>
+            SPOT
+          </h1>
         </div>
         <Form>
           <Form.Group className='mb-3'>
@@ -77,26 +79,27 @@ export default class LoginPage extends Component {
               </Button>
             </InputGroup>
           </Form.Group>
-          <Form.Group className='mb-3'>
-            <Form.Check type='checkbox'
-              label='Remember me'
-              onClick={e => this.updatePersist(e)}/>
-          </Form.Group>
           <div className='d-grid gap-2'>
-            <Button variant='primary'>Login</Button>
+            <Button variant='primary' onClick={() => this.handleLogin()}>
+              Login
+            </Button>
           </div>
         </Form>
         <div className='mt-3 text-center'>
-          <a href='forgot-password' style={{textDecoration: 'none'}}>
+          <a href='forgot-password' style={{ textDecoration: 'none' }}>
             Forgot Password?
           </a>
         </div>
         <hr/>
         <div className='d-grid gap-2'>
-          <Button variant='success'>Register</Button>
+          <Button variant='success' onClick={() => this.redirect('/register')}>
+            Register
+          </Button>
         </div>
       </div>
     );
   }
 
 }
+
+export default withRouter(LoginPage);
