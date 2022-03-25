@@ -10,6 +10,7 @@ import RegistrationPage from 'src/pages/registration-page/RegistrationPage';
 import ListingPage from 'src/pages/listing-page/ListingPage';
 import CreateListingPage from 'src/pages/create-listing-page/CreateListingPage'
 import CategoryPage from 'src/pages/category-page/CategoryPage';
+import UserDashboardPage from 'src/pages/user-dashboard/UserDashboardPage';
 
 export default class App extends Component {
 
@@ -27,6 +28,7 @@ export default class App extends Component {
           <Route path='/category' element={<CategoryPage/>}/>
           <Route path='/category/Car' element={<CategoryPage/>}/>
           <Route path='/category/Test' element={<CategoryPage/>}/>
+          <Route path='/profile' element={<UserDashboardPage/>}/> 
         </Routes>
       </BrowserRouter>
     );
