@@ -11,6 +11,8 @@ class ListingForm extends Component {
 
     constructor(props) {
         super(props);
+
+      
         this.state = {
             mode: this.props.mode,
             category: this.props.category,
