@@ -39,7 +39,11 @@ class Navigation extends Component {
         <Navbar.Brand href='/'>SPOT</Navbar.Brand>
         <Navbar.Toggle />
         <Navbar.Collapse id='responsive-navbar-nav'>
-    { this.renderAuthOptions() }
+          <NavDropdown title='Categories' id='collasible-nav-dropdown-category'>
+            <NavDropdown.Item href='/category/Car'>Cars</NavDropdown.Item>
+            <NavDropdown.Item href='/category/Test'>Test</NavDropdown.Item>
+          </NavDropdown>
+          {this.renderAuthOptions()}
         </Navbar.Collapse >
       </Navbar >
     );
