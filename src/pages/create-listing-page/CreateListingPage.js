@@ -1,30 +1,31 @@
 import React, { Component } from 'react';
+
+import ListingForm from 'src/forms/ListingForm.js';
+
 import { withRouter } from 'src/utilities/routing/withRouter.js';
-import './CreateListingsPage.css';
-import ListingForm from 'src/Forms/ListingForm.js';
-import Navigation from 'src/components/navigation/Navigation';
+
+import './CreateListingPage.css';
 
 class CreateListingPage extends Component {
 
-    constructor(props) {
-        super(props);
-        const params = new URLSearchParams(this.props.location.search);
+  constructor(props) {
+    super(props);
+    const params = new URLSearchParams(this.props.location.search);
+    this.state = {
+      category: params.get('category'),
+      mode: params.get('mode')
+    };
+  }
 
-        this.state = {
-            category: params.get('category'),
-            mode: params.get('mode')
-        };
+  render() {
+    return (
+      <ListingForm
+        category={this.state.category}
+        mode={this.state.mode}
+      />
+    );
+  }
 
-    }
-
-    render() {
-        return (
-            <div className='navbar-container'>
-                <Navigation />
-                <ListingForm category={this.state.category} mode={this.state.mode} />
-            </div>
-        );
-    }
 }
 
-export default withRouter(CreateListingPage)
+export default withRouter(CreateListingPage);

@@ -5,13 +5,6 @@ import { withRouter } from 'src/utilities/routing/withRouter.js';
 
 class AuthPage extends Component {
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      authorized: false
-    }
-  }
-
   componentDidMount() {
     setSession(window.location.hash);
   }

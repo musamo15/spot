@@ -1,17 +1,16 @@
 .category-page-container {
-    margin: auto;
-    height: auto;
-    width: 1200px;
-    padding-top: 20px;
+  margin: auto;
+  height: auto;
+  width: 1200px;
+  padding-top: 20px;
 }
 
-.card-row, .card-pop{
-    display: flex;
-    flex-direction: row;
-    gap: 10px;
-    flex-wrap: wrap;
+.card-row {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
 }
 
-.card-row .card:hover, .card-pop .card:hover {
-    background: #cacaca;
+.card-row .card:hover {
+  background: #eeeeee;
 }

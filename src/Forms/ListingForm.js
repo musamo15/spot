@@ -1,37 +1,41 @@
 import React, { Component } from 'react';
-import { Form, Button, Stack, Accordion } from 'react-bootstrap'
-import { withRouter } from 'src/utilities/routing/withRouter.js';
-import Calendar from 'react-calendar'
 import axios from 'axios';
-import 'react-calendar/dist/Calendar.css'
-import Car from './components/Car'
-import 'src/Forms/ListingForm.css'
+
+import Accordion from 'react-bootstrap/Accordion';
+import Button from 'react-bootstrap/Button';
+import Calendar from 'react-calendar';
+import Form from 'react-bootstrap/Form';
+import Stack from 'react-bootstrap/Stack';
+
+import Car from 'src/forms/Car';
+
+import { withRouter } from 'src/utilities/routing/withRouter.js';
+
+import './ListingForm.css';
 
 class ListingForm extends Component {
 
     constructor(props) {
-        super(props);
-
-      
-        this.state = {
-            mode: this.props.mode,
-            category: this.props.category,
-            item_name: String,
-            item_price: String,
-            start_date: String,
-            end_date: String,
-            attributes: {},
-            address: {
-                street: String,
-                city: String,
-                zip: String,
-                state: String
-            }
+      super(props);
+      this.state = {
+        mode: this.props.mode,
+        category: this.props.category,
+        item_name: String,
+        item_price: String,
+        start_date: String,
+        end_date: String,
+        attributes: {},
+        address: {
+          street: String,
+          city: String,
+          zip: String,
+          state: String
         }
-        this.handleSubmit = this.handleSubmit.bind(this)
-        this.handleChange = this.handleChange.bind(this)
-        this.handleAddressChange = this.handleAddressChange.bind(this)
-        this.handleDateChange = this.handleDateChange.bind(this)
+      }
+      this.handleSubmit = this.handleSubmit.bind(this);
+      this.handleChange = this.handleChange.bind(this);
+      this.handleAddressChange = this.handleAddressChange.bind(this);
+      this.handleDateChange = this.handleDateChange.bind(this);
     }
 
     handleChange(event) {

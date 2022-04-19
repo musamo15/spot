@@ -3,13 +3,14 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { createBrowserHistory } from 'history';
 
 import AuthPage from 'src/pages/auth-page/AuthPage';
+import CategoryPage from 'src/pages/category-page/CategoryPage';
+import CreateListingPage from 'src/pages/create-listing-page/CreateListingPage';
 import ErrorPage from 'src/pages/error-page/ErrorPage';
 import HomePage from 'src/pages/home-page/HomePage';
-import LoginPage from 'src/pages/login-page/LoginPage';
-import RegistrationPage from 'src/pages/registration-page/RegistrationPage';
 import ListingPage from 'src/pages/listing-page/ListingPage';
-import CreateListingPage from 'src/pages/create-listing-page/CreateListingPage'
-import CategoryPage from 'src/pages/category-page/CategoryPage';
+import LoginPage from 'src/pages/login-page/LoginPage';
+import NavWrapper from 'src/components/navigation/NavWrapper';
+import RegistrationPage from 'src/pages/registration-page/RegistrationPage';
 import UserDashboardPage from 'src/pages/user-dashboard/UserDashboardPage';
 
 export default class App extends Component {
@@ -18,17 +19,15 @@ export default class App extends Component {
     return (
       <BrowserRouter history={history}>
         <Routes>
-          <Route path='/' element={<HomePage/>}/>
-          <Route path='/authorize' element={<AuthPage/>}/>
-          <Route path='/login' element={<LoginPage/>}/>
-          <Route path='/register' element={<RegistrationPage/>}/>
-          <Route path='/listing' element={<ListingPage/>}/>
-          <Route path='/create-listing' element={<CreateListingPage/>}/>
-          <Route path='*' element={<ErrorPage/>}/>
-          <Route path='/category' element={<CategoryPage/>}/>
-          <Route path='/category/Car' element={<CategoryPage/>}/>
-          <Route path='/category/Test' element={<CategoryPage/>}/>
-          <Route path='/profile' element={<UserDashboardPage/>}/> 
+          <Route path='/' element={<NavWrapper component=<HomePage/>/>}/>
+          <Route path='authorize' element={<AuthPage/>}/>
+          <Route path='login' element={<LoginPage/>}/>
+          <Route path='register' element={<RegistrationPage/>}/>
+          <Route path='profile' element={<NavWrapper component=<UserDashboardPage/>/>}/>
+          <Route path='categories/:category_id' element={<NavWrapper component=<CategoryPage/>/>}/>
+          <Route path='categories/:category_id/listings/:listing_id' element={<NavWrapper component=<ListingPage/>/>}/>
+          <Route path='create-listing' element={<NavWrapper component=<CreateListingPage/>/>}/>
+          <Route path='*' element={<NavWrapper component=<ErrorPage/>/>}/>
         </Routes>
       </BrowserRouter>
     );

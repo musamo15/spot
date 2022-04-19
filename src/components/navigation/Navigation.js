@@ -16,19 +16,17 @@ class Navigation extends Component {
   renderAuthOptions() {
     if (isAuthenticated()) {
       return (
-        <Nav className='ms-auto'>
-          <NavDropdown title={getUser().nickname} id='collapsible-nav-dropdown' align='end'>
-            <NavDropdown.Item href='create-listing?category=generic&mode=create'>Create Listing</NavDropdown.Item>
-            <NavDropdown.Item onClick={() => logout()}>Logout</NavDropdown.Item>
-          </NavDropdown>
-        </Nav>
+        <NavDropdown title={getUser().nickname} id='auth-dropdown' align='end'>
+          <NavDropdown.Item href='/create-listing?category=generic&mode=create'>Create Listing</NavDropdown.Item>
+          <NavDropdown.Item onClick={() => logout()}>Logout</NavDropdown.Item>
+        </NavDropdown>
       );
     } else {
       return (
-        <Nav className='ms-auto'>
+        <>
           <Nav.Link href='/register'>Sign Up</Nav.Link>
           <Nav.Link href='/login'>Login</Nav.Link>
-        </Nav>
+        </>
       );
     }
   }
@@ -37,15 +35,17 @@ class Navigation extends Component {
     return (
       <Navbar collapseOnSelect className='px-3' expand='lg' sticky='top' bg='white'>
         <Navbar.Brand href='/'>SPOT</Navbar.Brand>
-        <Navbar.Toggle />
+        <Navbar.Toggle/>
         <Navbar.Collapse id='responsive-navbar-nav'>
-          <NavDropdown title='Categories' id='collasible-nav-dropdown-category'>
-            <NavDropdown.Item href='/category/Car'>Cars</NavDropdown.Item>
-            <NavDropdown.Item href='/category/Test'>Test</NavDropdown.Item>
-          </NavDropdown>
-          {this.renderAuthOptions()}
-        </Navbar.Collapse >
-      </Navbar >
+          <Nav className='ms-auto'>
+            <NavDropdown title='Categories' id='category-dropdown' align='end'>
+              <NavDropdown.Item href='/categories/Car'>Cars</NavDropdown.Item>
+              <NavDropdown.Item href='/categories/Test'>Test</NavDropdown.Item>
+            </NavDropdown>
+            {this.renderAuthOptions()}
+          </Nav>
+        </Navbar.Collapse>
+      </Navbar>
     );
   }
 
