@@ -54,7 +54,9 @@ export const isAuthenticated = () => {
 }
 
 export const getUser = () => {
-  return JSON.parse(localStorage.getItem('user'));
+  if (isAuthenticated()) {
+    return JSON.parse(localStorage.getItem('user'));
+  }
 }
 
 export const setSession = (hash) => {

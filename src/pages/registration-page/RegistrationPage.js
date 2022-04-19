@@ -16,7 +16,7 @@ class Registration extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      firstName: '', // user enterd first name
+      firstName: '', // user entered first name
       lastName: '', // user entered last name
       email: '', // user entered email
       password: '', // user entered password
@@ -140,33 +140,28 @@ class Registration extends Component {
           <div className='popover-body-container'>
             <h6>Password Requirements</h6>
             <Form.Group className='mb-1'>
-              <Form.Check type='checkbox'
+              <Form.Check readOnly type='checkbox'
                 label='One uppercase character'
-                readOnly={true}
                 checked={this.state.passwordContainsUppercase}/>
             </Form.Group>
             <Form.Group className='mb-1'>
-              <Form.Check type='checkbox'
+              <Form.Check readOnly type='checkbox'
                 label='One lowercase character'
-                readOnly={true}
                 checked={this.state.passwordContainsLowercase}/>
             </Form.Group>
             <Form.Group className='mb-1'>
-              <Form.Check type='checkbox'
+              <Form.Check readOnly type='checkbox'
                 label='One number'
-                readOnly={true}
                 checked={this.state.passwordContainsNumber}/>
             </Form.Group>
             <Form.Group className='mb-1'>
-              <Form.Check type='checkbox'
+              <Form.Check readOnly type='checkbox'
                 label='One special character'
-                readOnly={true}
                 checked={this.state.passwordContainsSpecial}/>
             </Form.Group>
             <Form.Group className='mb-1'>
-              <Form.Check type='checkbox'
+              <Form.Check readOnly type='checkbox'
                 label='At least 8 characters'
-                readOnly={true}
                 checked={this.state.passwordLengthOkay}/>
             </Form.Group>
           </div>
