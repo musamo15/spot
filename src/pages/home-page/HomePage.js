@@ -14,8 +14,8 @@ class HomePage extends Component {
   }
 
   render() {
-    return(
-      <div className='home-page-container'>
+    return (
+      <div className='layout-container'>
         <Carousel className='mb-4'>
           <Carousel.Item interval={10000}>
             <img
@@ -23,7 +23,7 @@ class HomePage extends Component {
               alt='Model S'
               width='1200px'
               height='400px'
-              style={{'objectFit': 'cover'}}
+              style={{ 'objectFit': 'cover' }}
             />
             <Carousel.Caption>
               <h3>Model S</h3>
@@ -36,7 +36,7 @@ class HomePage extends Component {
               alt='Cybertruck'
               width='1200px'
               height='400px'
-              style={{'objectFit': 'cover'}}
+              style={{ 'objectFit': 'cover' }}
             />
             <Carousel.Caption>
               <h3>Cybertruck</h3>

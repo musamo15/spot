@@ -6,33 +6,33 @@ const database = 'Username-Password-Authentication';
 
 export const login = (email, password) => {
   webAuth.login({
-      realm: database, // database name
-      email: email,
-      password: password
-    }, function (err, authResult) {
-      if (err) {
-        return console.log(err);
-      }
+    realm: database, // database name
+    email: email,
+    password: password
+  }, function (err, authResult) {
+    if (err) {
+      return console.log(err);
     }
+  }
   );
 }
 
 export const signupAndLogin = (props) => {
   webAuth.signup({
-        connection: database,
-        email: props.email,
-        password: props.password,
-        name: `${props.user_metadata.first_name} ${props.user_metadata.last_name}`,
-        nickname: props.user_metadata.first_name,
-        user_metadata: props.user_metadata
-    }, function (err) {
-        if (err) {
-          return console.log(err);
-        }
+    connection: database,
+    email: props.email,
+    password: props.password,
+    name: `${props.user_metadata.first_name} ${props.user_metadata.last_name}`,
+    nickname: props.user_metadata.first_name,
+    user_metadata: props.user_metadata
+  }, function (err) {
+    if (err) {
+      return console.log(err);
+    }
 
-        // automatically login the user after registration
-        login(props.email, props.password);
-    });
+    // automatically login the user after registration
+    login(props.email, props.password);
+  });
 }
 
 export const logout = async () => {
@@ -59,13 +59,20 @@ export const getUser = () => {
   }
 }
 
+export const getAccessToken = () => {
+  if(isAuthenticated()) {
+    return localStorage.getItem('id_token')
+  }
+}
+
+
 export const setSession = (hash) => {
-  webAuth.parseHash({ hash: hash }, function(err, authResult) {
+  webAuth.parseHash({ hash: hash }, function (err, authResult) {
     if (err) {
       return console.log(err);
     }
 
-    webAuth.client.userInfo(authResult.accessToken, function(err, user) {
+    webAuth.client.userInfo(authResult.accessToken, function (err, user) {
       if (err) {
         return console.log(err);
       }

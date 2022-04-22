@@ -123,7 +123,7 @@ class ListingForm extends Component {
 
     render() {
         return (
-            <Stack gap={4} className="col-md-5 mx-auto">
+            <Stack gap={4}>
                 <Form onSubmit={(event) => this.handleSubmit(event)}>
                     <Accordion defaultActiveKey={['0', '1', '2', '3', '4']} alwaysOpen flush>
                         <Accordion.Item eventKey="0">
