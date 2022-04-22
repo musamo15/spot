@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
@@ -9,8 +10,34 @@ import { withRouter } from 'src/utilities/routing/withRouter.js';
 
 class Navigation extends Component {
 
+  constructor(props) {
+    super(props)
+    this.state = {
+      categories: [],
+    }
+  }
+
   redirect(path) {
     this.props.navigate(path);
+  }
+
+  componentDidMount() {
+    this.getCategories()
+
+  }
+
+  async getCategories() {
+    try {
+      const resp = await axios.get('http://localhost:8000/categories');
+      if (resp.status === 200) {
+        this.setState({
+          categories: resp.data
+        });
+      }
+    } catch (error) {
+      // Do nothing
+    }
+
   }
 
   renderAuthOptions() {
@@ -36,12 +63,14 @@ class Navigation extends Component {
     return (
       <Navbar collapseOnSelect className='px-3' expand='lg' sticky='top' bg='white'>
         <Navbar.Brand href='/'>SPOT</Navbar.Brand>
-        <Navbar.Toggle/>
+        <Navbar.Toggle />
         <Navbar.Collapse id='responsive-navbar-nav'>
           <Nav className='ms-auto'>
             <NavDropdown title='Categories' id='category-dropdown' align='end'>
-              <NavDropdown.Item href='/categories/Car'>Cars</NavDropdown.Item>
-              <NavDropdown.Item href='/categories/Test'>Test</NavDropdown.Item>
+              {this.state.categories.map((category) => (
+                <NavDropdown.Item href={`/categories/${category}`}>{category.toString().charAt(0).toUpperCase() + category.toString().slice(1)}</NavDropdown.Item>
+                )
+              )}
             </NavDropdown>
             {this.renderAuthOptions()}
           </Nav>
