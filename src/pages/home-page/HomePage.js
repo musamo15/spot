@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React, { Component } from 'react';
 
 import Card from 'react-bootstrap/Card';
@@ -9,129 +10,130 @@ import './HomePage.css';
 
 class HomePage extends Component {
 
+  constructor(props){
+    super(props)
+    this.state = {
+      listings: []
+    }
+    this.populateListings = this.populateListings.bind(this)
+  }
+
   redirect(path) {
     this.props.navigate(path);
   }
 
+  componentDidMount()
+  {
+    this.populateListings()
+  }
+
+  async populateListings()
+  {
+    try{
+      const resp = await axios.get('http://localhost:8000/listings?category=tests')
+      let listings = []
+  
+      for(let i = 0; i < resp.data.length; i++){
+        const listing = resp.data[i]
+  
+        listings.push({
+          id: listing.listing_id,
+          name: listing.item_name,
+          price: listing.item_price
+        })
+  
+      }
+
+      this.setState({listings: listings})
+    }catch (err) {
+
+    }
+    
+
+  }
+
   render() {
-    return (
+    return(
       <div className='layout-container'>
         <Carousel className='mb-4'>
-          <Carousel.Item interval={10000}>
-            <img
-              src='https://tesla-view.thron.com/api/xcontents/resources/delivery/getThumbnail/tesla/590x504/44ac2002-409d-42b4-8cdd-6e6cfe635d8d.jpg?v=47&dpr=200'
-              alt='Model S'
-              width='1200px'
-              height='400px'
-              style={{ 'objectFit': 'cover' }}
-            />
-            <Carousel.Caption>
-              <h3>Model S</h3>
-              <p>Starting at $30/day</p>
-            </Carousel.Caption>
-          </Carousel.Item>
-          <Carousel.Item interval={10000}>
-            <img
-              src='https://tesla-view.thron.com/api/xcontents/resources/delivery/getThumbnail/tesla/590x504/cd83892a-610a-4e31-aadc-cb837ec68fe2.jpg?v=25&dpr=200'
-              alt='Cybertruck'
-              width='1200px'
-              height='400px'
-              style={{ 'objectFit': 'cover' }}
-            />
-            <Carousel.Caption>
-              <h3>Cybertruck</h3>
-              <p>Starting at $50/day</p>
-            </Carousel.Caption>
-          </Carousel.Item>
+        {this.state.listings.filter((item,idx) => idx < 4).map((listing)=>
+            
+          
+            <Carousel.Item interval={10000}
+            onClick={e => this.redirect(`/categories/tests/listings/${listing.id}`) }
+            >
+              <img
+                src='https://tesla-view.thron.com/api/xcontents/resources/delivery/getThumbnail/tesla/590x504/44ac2002-409d-42b4-8cdd-6e6cfe635d8d.jpg?v=47&dpr=200'
+                alt='Model S'
+                width='1200px'
+                height='400px'
+                style={{'objectFit': 'cover'}}
+              />
+              <Carousel.Caption>
+                <h3>{listing.name}</h3>
+                <p>${listing.price}/day</p>
+              </Carousel.Caption>
+            </Carousel.Item>
+          
+
+        )}
         </Carousel>
         <h5>Popular Listings</h5>
         <div className='card-row'>
-          <Card style={{ width: '14rem', cursor: 'pointer' }} onClick={e => this.redirect('category/listing/id')}>
-            <Card.Img
-              variant='top'
-              src='https://tesla-view.thron.com/api/xcontents/resources/delivery/getThumbnail/tesla/590x504/44ac2002-409d-42b4-8cdd-6e6cfe635d8d.jpg?v=47&dpr=200'
-              alt='Model S'
-            />
-            <Card.Body>
-              <Card.Title>Model S</Card.Title>
-              <Card.Subtitle className='mb-2 text-muted'>15.3 miles away</Card.Subtitle>
-              <Card.Text>
-                $30/day
-              </Card.Text>
-            </Card.Body>
-          </Card>
-          <Card style={{ width: '14rem', cursor: 'pointer' }} onClick={e => this.redirect('category/listings/id')}>
-            <Card.Img
-              variant='top'
-              src='https://tesla-view.thron.com/api/xcontents/resources/delivery/getThumbnail/tesla/590x504/cd83892a-610a-4e31-aadc-cb837ec68fe2.jpg?v=25&dpr=200'
-              alt='Cybertruck'
-            />
-            <Card.Body>
-              <Card.Title>Cybertruck</Card.Title>
-              <Card.Subtitle className='mb-2 text-muted'>11.8 miles away</Card.Subtitle>
-              <Card.Text>
-                $55/day
-              </Card.Text>
-            </Card.Body>
-          </Card>
-          <Card style={{ width: '14rem', cursor: 'pointer' }} onClick={e => this.redirect('category/listings/id')}>
-            <Card.Img
-              variant='top'
-              src='https://tesla-view.thron.com/api/xcontents/resources/delivery/getThumbnail/tesla/590x504/44ac2002-409d-42b4-8cdd-6e6cfe635d8d.jpg?v=47&dpr=200'
-              alt='Model S'
-            />
-            <Card.Body>
-              <Card.Title>Model S</Card.Title>
-              <Card.Subtitle className='mb-2 text-muted'>15.3 miles away</Card.Subtitle>
-              <Card.Text>
-                $30/day
-              </Card.Text>
-            </Card.Body>
-          </Card>
-          <Card style={{ width: '14rem', cursor: 'pointer' }} onClick={e => this.redirect('category/listings/id')}>
-            <Card.Img
-              variant='top'
-              src='https://tesla-view.thron.com/api/xcontents/resources/delivery/getThumbnail/tesla/590x504/cd83892a-610a-4e31-aadc-cb837ec68fe2.jpg?v=25&dpr=200'
-              alt='Cybertruck'
-            />
-            <Card.Body>
-              <Card.Title>Cybertruck</Card.Title>
-              <Card.Subtitle className='mb-2 text-muted'>11.8 miles away</Card.Subtitle>
-              <Card.Text>
-                $55/day
-              </Card.Text>
-            </Card.Body>
-          </Card>
-          <Card style={{ width: '14rem', cursor: 'pointer' }} onClick={e => this.redirect('category/listings/id')}>
-            <Card.Img
-              variant='top'
-              src='https://tesla-view.thron.com/api/xcontents/resources/delivery/getThumbnail/tesla/590x504/44ac2002-409d-42b4-8cdd-6e6cfe635d8d.jpg?v=47&dpr=200'
-              alt='Model S'
-            />
-            <Card.Body>
-              <Card.Title>Model S</Card.Title>
-              <Card.Subtitle className='mb-2 text-muted'>15.3 miles away</Card.Subtitle>
-              <Card.Text>
-                $30/day
-              </Card.Text>
-            </Card.Body>
-          </Card>
-          <Card style={{ width: '14rem', cursor: 'pointer' }} onClick={e => this.redirect('category/listings/id')}>
-            <Card.Img
-              variant='top'
-              src='https://tesla-view.thron.com/api/xcontents/resources/delivery/getThumbnail/tesla/590x504/cd83892a-610a-4e31-aadc-cb837ec68fe2.jpg?v=25&dpr=200'
-              alt='Cybertruck'
-            />
-            <Card.Body>
-              <Card.Title>Cybertruck</Card.Title>
-              <Card.Subtitle className='mb-2 text-muted'>11.8 miles away</Card.Subtitle>
-              <Card.Text>
-                $55/day
-              </Card.Text>
-            </Card.Body>
-          </Card>
+            {this.state.listings.map((listing) => (
+              <Card
+                style={{ width: '14rem', cursor: 'pointer' }}
+                onClick={e => this.redirect(`/categories/tests/listings/${listing.id}`) }
+              >
+                <Card.Img
+                  variant='top'
+                  src='https://tesla-view.thron.com/api/xcontents/resources/delivery/getThumbnail/tesla/590x504/44ac2002-409d-42b4-8cdd-6e6cfe635d8d.jpg?v=47&dpr=200'
+                  alt='Model S'
+                />
+                <Card.Body>
+                  <Card.Title>{listing.name}</Card.Title>
+                  <Card.Text>${listing.price}/day</Card.Text>
+                </Card.Body>
+              </Card>
+            ))}
         </div>
+        <div className = "tutorial">
+          <h3>How to use SPOT</h3>
+          <ul className = "tutorial-item">
+            <li>
+              This is how you use SPOT
+            </li>
+            <li>
+              This is how you use SPOT
+            </li>
+            <li>
+              This is how you use SPOT
+            </li>
+            <li>
+              This is how you use SPOT
+            </li>
+          </ul>
+        </div>
+        <div className = "FAQ">
+          <h3>Frequently Asked Questions</h3>
+          <ul className = "tutorial-item">
+            <li>
+              This is a frequently asked question
+            </li>
+            <li>
+            This is a frequently asked question
+            </li>
+            <li>
+            This is a frequently asked question
+            </li>
+            <li>
+            This is a frequently asked question
+            </li>
+          </ul>
+        </div>
+
       </div>
+      
     );
   }
 
