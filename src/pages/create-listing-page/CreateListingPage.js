@@ -19,10 +19,12 @@ class CreateListingPage extends Component {
 
   render() {
     return (
-      <ListingForm
-        category={this.state.category}
-        mode={this.state.mode}
-      />
+      <div className='layout-container'>
+        <ListingForm
+          category={this.state.category}
+          mode={this.state.mode}
+        />
+      </div>
     );
   }
 

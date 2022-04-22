@@ -17,6 +17,7 @@ class Navigation extends Component {
     if (isAuthenticated()) {
       return (
         <NavDropdown title={getUser().nickname} id='auth-dropdown' align='end'>
+          <NavDropdown.Item href='/profile'>Profile</NavDropdown.Item>
           <NavDropdown.Item href='/create-listing?category=generic&mode=create'>Create Listing</NavDropdown.Item>
           <NavDropdown.Item onClick={() => logout()}>Logout</NavDropdown.Item>
         </NavDropdown>

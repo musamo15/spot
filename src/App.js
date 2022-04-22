@@ -19,15 +19,15 @@ export default class App extends Component {
     return (
       <BrowserRouter history={history}>
         <Routes>
-          <Route path='/' element={<NavWrapper component=<HomePage/>/>}/>
-          <Route path='authorize' element={<AuthPage/>}/>
-          <Route path='login' element={<LoginPage/>}/>
-          <Route path='register' element={<RegistrationPage/>}/>
-          <Route path='profile' element={<NavWrapper component=<UserDashboardPage/>/>}/>
-          <Route path='categories/:category_id' element={<NavWrapper component=<CategoryPage/>/>}/>
-          <Route path='categories/:category_id/listings/:listing_id' element={<NavWrapper component=<ListingPage/>/>}/>
-          <Route path='create-listing' element={<NavWrapper component=<CreateListingPage/>/>}/>
-          <Route path='*' element={<NavWrapper component=<ErrorPage/>/>}/>
+          <Route path='/' element={<NavWrapper component=<HomePage/> />} />
+          <Route path='authorize' element={<AuthPage />} />
+          <Route path='login' element={<LoginPage />} />
+          <Route path='register' element={<RegistrationPage />} />
+          <Route path='profile' element={<NavWrapper component=<UserDashboardPage/> />} />
+          <Route path='categories/:category_id' element={<NavWrapper component=<CategoryPage/> />} />
+          <Route path='categories/:category_id/listings/:listing_id' element={<NavWrapper component=<ListingPage/> />} />
+          <Route path='create-listing' element={<NavWrapper component=<CreateListingPage/> />} />
+          <Route path='*' element={<NavWrapper component=<ErrorPage/> />} />
         </Routes>
       </BrowserRouter>
     );
