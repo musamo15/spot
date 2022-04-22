@@ -4,9 +4,10 @@ import axios from 'axios';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import NavDropdown from 'react-bootstrap/NavDropdown';
-
+import SearchBar from 'src/components/SearchBar';
 import { isAuthenticated, logout, getUser } from 'src/utilities/authentication/auth.js';
 import { withRouter } from 'src/utilities/routing/withRouter.js';
+
 
 class Navigation extends Component {
 
@@ -66,9 +67,10 @@ class Navigation extends Component {
         <Navbar.Toggle />
         <Navbar.Collapse id='responsive-navbar-nav'>
           <Nav className='ms-auto'>
+            <SearchBar/>
             <NavDropdown title='Categories' id='category-dropdown' align='end'>
               {this.state.categories.map((category) => (
-                <NavDropdown.Item href={`/categories/${category}`}>{category.toString().charAt(0).toUpperCase() + category.toString().slice(1)}</NavDropdown.Item>
+                <NavDropdown.Item key={category} href={`/categories/${category}`}>{category.toString().charAt(0).toUpperCase() + category.toString().slice(1)}</NavDropdown.Item>
                 )
               )}
             </NavDropdown>
