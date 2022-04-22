@@ -12,6 +12,7 @@ import LoginPage from 'src/pages/login-page/LoginPage';
 import NavWrapper from 'src/components/navigation/NavWrapper';
 import RegistrationPage from 'src/pages/registration-page/RegistrationPage';
 import UserDashboardPage from 'src/pages/user-dashboard/UserDashboardPage';
+import SearchListingsPage from 'src/pages/search-listings-page/SearchListingsPage';
 
 export default class App extends Component {
 
@@ -27,6 +28,7 @@ export default class App extends Component {
           <Route path='categories/:category_id' element={<NavWrapper component=<CategoryPage/> />} />
           <Route path='categories/:category_id/listings/:listing_id' element={<NavWrapper component=<ListingPage/> />} />
           <Route path='create-listing' element={<NavWrapper component=<CreateListingPage/> />} />
+          <Route path='search' element={<NavWrapper component=<SearchListingsPage/> />} />
           <Route path='*' element={<NavWrapper component=<ErrorPage/> />} />
         </Routes>
       </BrowserRouter>
