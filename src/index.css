@@ -13,3 +13,13 @@ body {
   content:" *";
   color: red;
 }
+
+.card-row {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+
+.card-row .card:hover {
+  background: #eeeeee;
+}

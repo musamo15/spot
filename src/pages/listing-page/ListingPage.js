@@ -40,7 +40,7 @@ class ListingPage extends Component {
       listingId: this.props.params.listing_id
     };
     try {
-      const resp = await axios.get(`http://localhost:8000/getListing`, { params: params });
+      const resp = await axios.get(`http://localhost:8000/listings/${params.listingId}?category=${params.category}`);
 
       this.setState({
         host: resp.data.host_id,
