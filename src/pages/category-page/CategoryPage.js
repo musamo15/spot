@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
+import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
+import Form from 'react-bootstrap/Form';
+import NavDropdown from 'react-bootstrap/NavDropdown';
 
 import ErrorPage from 'src/pages/error-page/ErrorPage';
 
@@ -9,9 +12,6 @@ import { withRouter } from 'src/utilities/routing/withRouter.js';
 import { capitalFirst } from 'src/utilities/formatters/stringFormatter.js';
 
 import './CategoryPage.css';
-import { Form } from 'react-bootstrap';
-import { NavDropdown } from 'react-bootstrap';
-import Button from 'react-bootstrap/Button'
 
 class CategoryPage extends Component {
 
@@ -20,21 +20,21 @@ class CategoryPage extends Component {
     this.state = {
       listings: [],
       filters: {
-        "price_min": 0,
-        "price_max": 100000,
-        "distance": "150",
-        "start_date": "3000-01-01",
-        "end_date": "1970-01-01"
+        'price_min': 0,
+        'price_max': 100000,
+        'distance': '150',
+        'start_date': '3000-01-01',
+        'end_date': '1970-01-01'
       },
       sortedOn: 'None',
-      zip: "08012",
+      zip: '08012',
       loading: true,
       valid: false,
       error: ''
     };
 
-    this.defaultStartDate = "3000-01-01"
-    this.defaultEndDate = "1970-01-01"
+    this.defaultStartDate = '3000-01-01'
+    this.defaultEndDate = '1970-01-01'
     this.populateListings = this.populateListings.bind(this)
     this.handleFilterChange = this.handleFilterChange.bind(this)
     this.handleDateChange = this.handleDateChange.bind(this)
@@ -99,15 +99,15 @@ class CategoryPage extends Component {
     var target = event.target.name
     var value = event.target.value
 
-    if (value === "") {
-      if (target === "distance") {
-        value = "9999999999"
+    if (value === '') {
+      if (target === 'distance') {
+        value = '9999999999'
       }
-      else if (target === "price_min") {
+      else if (target === 'price_min') {
         value = 0;
       }
-      else if (target === "price_max") {
-        value = "9999999999"
+      else if (target === 'price_max') {
+        value = '9999999999'
       }
     }
 
@@ -126,7 +126,7 @@ class CategoryPage extends Component {
     var newFilters
 
     if (event.target.value === '') {
-      if (event.target.name === "start_date") {
+      if (event.target.name === 'start_date') {
         newFilters = { ...this.state.filters, [event.target.name]: this.defaultStartDate }
       }
       else {
@@ -152,9 +152,9 @@ class CategoryPage extends Component {
       // render the category page with listings
       return (
         <div className='whole-category-page-container'>
-          <NavDropdown title='Sort & Filter' id='collapsible-nav-sorting'>
+          <NavDropdown title='Sort & Filter' id='sorts-and-filters'>
             <Form>
-              <div key={'radio'} className="mb-3">
+              <div key={'radio'} className='mb-3'>
                 <p id='sort'>Sort By:</p>
                 <Form.Check
                   type='radio'
@@ -200,7 +200,7 @@ class CategoryPage extends Component {
                 <div id='distance' class='hide'>
                   <Form.Group className='mb-3' controlId='form-max-distance'>
                     <Form.Label>Max Distance</Form.Label>
-                    <Form.Control name="distance" type='text' placeholder='Enter Maximum Distance' defaultValue={this.state.filters.price_max} onChange={(event) => this.handleFilterChange(event)} />
+                    <Form.Control name='distance' type='text' placeholder='Enter Maximum Distance' defaultValue={this.state.filters.price_max} onChange={(event) => this.handleFilterChange(event)} />
                   </Form.Group>
                 </div>
 
@@ -211,14 +211,15 @@ class CategoryPage extends Component {
                   name='filter-group'
                   onClick={e => document.getElementById('price').classList.toggle('hide')}
                 />
+
                 <div id='price' class='hide'>
                   <Form.Group className='mb-3' controlId='form-min-price'>
                     <Form.Label>Min Price</Form.Label>
-                    <Form.Control name="price_min" type='text' placeholder='Enter Minimum Price' onChange={(event) => this.handleFilterChange(event)} />
+                    <Form.Control name='price_min' type='text' placeholder='Enter Minimum Price' onChange={(event) => this.handleFilterChange(event)} />
                   </Form.Group>
                   <Form.Group className='mb-3' controlId='form-max-price'>
                     <Form.Label>Max Price</Form.Label>
-                    <Form.Control name="price_max" type='text' placeholder='Enter Maximum Price' onChange={(event) => this.handleFilterChange(event)} />
+                    <Form.Control name='price_max' type='text' placeholder='Enter Maximum Price' onChange={(event) => this.handleFilterChange(event)} />
                   </Form.Group>
                 </div>
 
@@ -232,20 +233,20 @@ class CategoryPage extends Component {
                 <div id='availability' class='hide'>
                   <Form.Group className='mb-3' controlId='form-min-day'>
                     <Form.Label>Start Date</Form.Label>
-                    <Form.Control name="start_date" type='date' placeholder='Enter Start Date' onChange={(event) => this.handleDateChange(event)} />
+                    <Form.Control name='start_date' type='date' placeholder='Enter Start Date' onChange={(event) => this.handleDateChange(event)} />
                   </Form.Group>
                   <Form.Group className='mb-3' controlId='form-max-day'>
                     <Form.Label>End Date</Form.Label>
-                    <Form.Control type='date' name="end_date" placeholder='Enter End Date' onChange={(event) => this.handleDateChange(event)} />
+                    <Form.Control type='date' name='end_date' placeholder='Enter End Date' onChange={(event) => this.handleDateChange(event)} />
                   </Form.Group>
                 </div>
-                <Button variant="primary" onClick={async () => { await this.populateListings() }} >
+                <Button variant='primary' onClick={async () => { await this.populateListings() }} >
                   Search
                 </Button>
               </div >
             </Form >
           </NavDropdown>
-          <div className='category-page-container'>
+          <div className='layout-container'>
             <h1>{capitalFirst(this.props.params.category_id)}</h1>
             <h5>All Listings</h5>
             <div className='card-row'>
@@ -279,4 +280,3 @@ class CategoryPage extends Component {
 }
 
 export default withRouter(CategoryPage);
-//                onClick={e => this.redirect(`/listings/${listing.id}'category=${this.props.params.category_id}`)}

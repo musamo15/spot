@@ -1,29 +1,3 @@
-.category-page-container {
-  margin: auto;
-  height: auto;
-  width: 1200px;
-  padding-top: 20px;
-}
-
-.card-row {
-  display: flex;
-  flex-direction: row;
-  gap: 10px;
-}
-
-.card-row .card:hover {
-  background: #eeeeee;
-}
-
-#collapsible-nav-sorting {
-  margin-left: 10px;
-}
-
-.mb-3 {
-  margin-left: 10px;
-  margin-right: 10px;
-}
-
 .hide {
   display: none;
 }

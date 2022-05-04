@@ -28,7 +28,7 @@ class SearchBar extends Component {
     handleChange(event) {
         const searchQuery = event.target.value
         const disabled = searchQuery.length <= 0
-        
+
         this.setState({ query: searchQuery, searchButtonDisabled: disabled})
     }
 
@@ -38,15 +38,14 @@ class SearchBar extends Component {
 
     render() {
         return (
-            <InputGroup className="mb-0">
+            <InputGroup className='me-2'>
                 <FormControl
                     type="search"
                     placeholder="Search"
-                    className="me-2"
                     aria-label="Search"
                     onChange={(event) => this.handleChange(event)}
                 />
-                <Button variant="outline-success" onClick={() => this.handleSubmit()} disabled={this.state.searchButtonDisabled}>
+                <Button variant="primary" onClick={() => this.handleSubmit()} disabled={this.state.searchButtonDisabled}>
                     Search
                 </Button>
             </InputGroup>

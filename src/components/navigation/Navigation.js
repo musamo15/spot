@@ -53,7 +53,7 @@ class Navigation extends Component {
     } else {
       return (
         <>
-          <Nav.Link href='/register'>Sign Up</Nav.Link>
+          <Nav.Link href='/register'>Register</Nav.Link>
           <Nav.Link href='/login'>Login</Nav.Link>
         </>
       );
@@ -66,8 +66,8 @@ class Navigation extends Component {
         <Navbar.Brand href='/'>SPOT</Navbar.Brand>
         <Navbar.Toggle />
         <Navbar.Collapse id='responsive-navbar-nav'>
+          <SearchBar />
           <Nav className='ms-auto'>
-            <SearchBar/>
             <NavDropdown title='Categories' id='category-dropdown' align='end'>
               {this.state.categories.map((category) => (
                 <NavDropdown.Item key={category} href={`/categories/${category}`}>{category.toString().charAt(0).toUpperCase() + category.toString().slice(1)}</NavDropdown.Item>
