@@ -35,13 +35,10 @@ class ListingPage extends Component {
   }
 
   async populateListing() {
-    const params = {
-      category: this.props.params.category_id,
-      listingId: this.props.params.listing_id
-    };
+
     try {
-      const resp = await axios.get(`http://localhost:8000/listings/${params.listingId}?category=${params.category}`);
-      console.log(resp)
+      const resp = await axios.get(`http://localhost:8000/listings/${this.props.params.listing_id}`, {params: {category: this.props.params.category_id}});
+
       this.setState({
         host: resp.data.host_id,
         title: resp.data.item_name,
@@ -64,6 +61,14 @@ class ListingPage extends Component {
         error: msg
       });
     }
+  }
+
+  redirect(path) {
+    this.props.navigate(path);
+  }
+
+  redirectToEdit() {
+    this.redirect(`/create-listing?category=${this.props.params.category_id}&listing_id=${this.props.params.listing_id}&mode=edit`)
   }
 
   render() {
@@ -99,11 +104,10 @@ class ListingPage extends Component {
           <div className='rent-options'>
             <div className='edit-listing'>
               <div className={'edit mt-2'}>Rent Options</div>
-                <Button variant='dark'>Edit</Button>
+                <Button variant='dark'  onClick={(e) => this.redirectToEdit()}>Edit</Button>
               </div>
             <div>Price</div>
             {this.state.price}
-            <Button variant='dark'>Continue</Button>
           </div>
         </div>
         <div>Listed by {this.state.host}</div>
