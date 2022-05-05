@@ -13,7 +13,8 @@ class CreateListingPage extends Component {
     const params = new URLSearchParams(this.props.location.search);
     this.state = {
       category: params.get('category'),
-      mode: params.get('mode')
+      mode: params.get('mode'),
+      listingId: params.get('listing_id')
     };
   }
 
@@ -23,6 +24,7 @@ class CreateListingPage extends Component {
         <ListingForm
           category={this.state.category}
           mode={this.state.mode}
+          listingId={this.state.listingId}
         />
       </div>
     );
