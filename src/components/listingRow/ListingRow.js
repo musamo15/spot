@@ -58,7 +58,7 @@ class ListingRow extends Component {
                         />
                         <Card.Body>
                             <Card.Title>{listing.name}</Card.Title>
-                            <Card.Subtitle className='mb-2 text-muted'>2 miles away</Card.Subtitle>
+                            <Card.Subtitle className='mb-2 text-muted'>{listing.distance === 'undefined' ? listing.distance + " miles away" : ''}</Card.Subtitle>
                             <Card.Text>${listing.price}/day</Card.Text>
                         </Card.Body>
                     </Card>
@@ -67,7 +67,7 @@ class ListingRow extends Component {
         }
         else {
             return (
-                <h4>Unable to find listings</h4>
+                <h4>{this.props.noListingsMessage}</h4>
             )
         }
     }

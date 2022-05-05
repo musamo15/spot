@@ -41,7 +41,7 @@ class ListingPage extends Component {
     };
     try {
       const resp = await axios.get(`http://localhost:8000/listings/${params.listingId}?category=${params.category}`);
-
+      console.log(resp)
       this.setState({
         host: resp.data.host_id,
         title: resp.data.item_name,
@@ -112,7 +112,7 @@ class ListingPage extends Component {
           </div>
           <div className='item-description'>
             {Object.entries(this.state.attributes).map(attribute =>
-              <div>
+              <div key={attribute[0]}>
                 <h3>{attribute[0]}</h3>
                 <p>{attribute[1]}</p>
               </div>

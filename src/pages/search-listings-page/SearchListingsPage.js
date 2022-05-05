@@ -63,7 +63,7 @@ class SearchListingsPage extends Component {
 
     render() {
         return (
-            <ListingRow mode={this.state.mode} listings={this.state.listings} header="Listings Found" />
+            <ListingRow mode={this.state.mode} listings={this.state.listings} header="Listings Found" noListingsMessage='Unable to find listings'/>
         )
     }
 }
