@@ -82,43 +82,43 @@ class ListingPage extends Component {
           <div className='titles'>{this.state.title}</div>
           <div className='listing-row'>
             <Carousel className='mb-2' style={{ width: '800px' }} interval={null}>
-             <Carousel.Item>
-              <img
-                src='https://i.guim.co.uk/img/media/3547ba0f293eb4702bab2d2c1aed323d9f9a255a/1139_892_3139_1884/master/3139.jpg?width=1200&quality=85&auto=format&fit=max&s=e9f0fd94d7bd8d489a7de6b76b241397'
-                alt='Honda Type R'
-                width='800px'
-                height='400px'
-                style={{ 'objectFit': 'cover' }}
-              />
-            </Carousel.Item>
-            <Carousel.Item>
-              <img
-                src='https://cimg0.ibsrv.net/ibimg/hgm/1920x1080-1/100/609/2017-honda-civic-sdn_100609652.jpg'
-                alt='Honda Type R'
-                width='800px'
-                height='400px'
-                style={{ 'objectFit': 'cover' }}
-              />
-            </Carousel.Item>
-          </Carousel>
-          <div className='rent-options'>
-            <div className='edit-listing'>
-              <div className={'edit mt-2'}>Rent Options</div>
+              <Carousel.Item>
+                <img
+                  src='https://i.guim.co.uk/img/media/3547ba0f293eb4702bab2d2c1aed323d9f9a255a/1139_892_3139_1884/master/3139.jpg?width=1200&quality=85&auto=format&fit=max&s=e9f0fd94d7bd8d489a7de6b76b241397'
+                  alt='Honda Type R'
+                  width='800px'
+                  height='400px'
+                  style={{ 'objectFit': 'cover' }}
+                />
+              </Carousel.Item>
+              <Carousel.Item>
+                <img
+                  src='https://cimg0.ibsrv.net/ibimg/hgm/1920x1080-1/100/609/2017-honda-civic-sdn_100609652.jpg'
+                  alt='Honda Type R'
+                  width='800px'
+                  height='400px'
+                  style={{ 'objectFit': 'cover' }}
+                />
+              </Carousel.Item>
+            </Carousel>
+            <div className='rent-options'>
+              <div className='edit-listing'>
+                <div className={'edit mt-2'}>Rent Options</div>
                 <Button variant='dark'  onClick={(e) => this.redirectToEdit()}>Edit</Button>
               </div>
-            <div>Price</div>
-            {this.state.price}
+              <div>Price</div>
+               <b>${this.state.price} / day </b>
+            </div>
           </div>
-        </div>
-        <div>Listed by {this.state.host}</div>
+          <div>Listed by <b>{this.state.host}</b></div>
           <div className='mt-4 titles'>
-              Item Description
+            <b>Item Features</b>
           </div>
           <div className='item-description'>
             {Object.entries(this.state.attributes).map(attribute =>
-              <div key={attribute[0]}>
-                <h3>{attribute[0]}</h3>
-                <p>{attribute[1]}</p>
+              <div key={attribute[0]} className='attributes'>
+                <p className='attribute'>{attribute[0]}:</p>
+                <p className='attribute'>{attribute[1]}</p>
               </div>
             )}
           </div>
@@ -126,7 +126,7 @@ class ListingPage extends Component {
       );
     } else {
       // display error page - invalid category/listing or response
-      return (<ErrorPage message={this.state.error}/>);
+      return (<ErrorPage message={this.state.error} />);
     }
 
   }
