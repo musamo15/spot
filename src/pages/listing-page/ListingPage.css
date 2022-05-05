@@ -38,4 +38,20 @@
 .item-description {
   display: flex;
   flex-direction: column;
+  flex-wrap: wrap;
+  padding: 20px;
+  margin-bottom: 20px;
+  background-color: rgb(240, 240, 240);
+  max-height: 400px;
+  overflow: auto;
+}
+
+.attributes {
+  display: flex;
+  flex-direction: row;
+  margin-right: 20px;
+}
+
+.attribute {
+  padding: 3px;
 }

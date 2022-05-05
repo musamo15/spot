@@ -144,6 +144,12 @@ class CategoryPage extends Component {
 
   }
 
+  updateZip(e) {
+    this.setState({
+      zip: e.target.value
+    });
+  }
+
   render() {
     if (this.state.loading) {
       // loading screen is empty
@@ -180,67 +186,46 @@ class CategoryPage extends Component {
                   onChange={e => this.setState({ sortedOn: 'priceHighToLow' })}
                 />
 
-                <Form.Check
-                  type='radio'
-                  id='none'
-                  label='No Sorting'
-                  name='sort-group'
-                  onChange={e => this.setState({ sortedOn: 'None' })}
-                />
-
-                <br />
                 <p id='filter'>Filter By:</p>
-                <Form.Check
-                  type='checkbox'
-                  id='location filter'
-                  label='Location'
-                  name='filter-group'
-                  onClick={e => document.getElementById('distance').classList.toggle('hide')}
-                />
-                <div id='distance' class='hide'>
+                <div id='price'>
+                  <Form.Group className='mb-3' controlId='form-min-price'>
+                    <Form.Label>Min Price</Form.Label>
+                    <Form.Control name='price_min' type='text' placeholder='' onChange={(event) => this.handleFilterChange(event)} />
+                  </Form.Group>
+            
+                  <Form.Group className='mb-3' controlId='form-max-price'>
+                    <Form.Label>Max Price</Form.Label>
+                    <Form.Control name='price_max' type='text' placeholder='' onChange={(event) => this.handleFilterChange(event)} />
+                  </Form.Group>
+                </div>
+
+                <div id='availability' >
+                  <Form.Group className='mb-3' controlId='form-min-day'>
+                    <Form.Label>Availability Start Date</Form.Label>
+                    <Form.Control name='start_date' type='date' placeholder='Enter Start Date' onChange={(event) => this.handleDateChange(event)} />
+                  </Form.Group>
+                  <Form.Group className='mb-3' controlId='form-max-day'>
+                    <Form.Label>Availability End Date</Form.Label>
+                    <Form.Control type='date' name='end_date' placeholder='Enter End Date' onChange={(event) => this.handleDateChange(event)} />
+                  </Form.Group>
+                </div>
+
+                <div id='distance' >
                   <Form.Group className='mb-3' controlId='form-max-distance'>
                     <Form.Label>Max Distance</Form.Label>
                     <Form.Control name='distance' type='text' placeholder='Enter Maximum Distance' defaultValue={this.state.filters.price_max} onChange={(event) => this.handleFilterChange(event)} />
                   </Form.Group>
+
+                <Form.Group className='mb-3'>
+                  <Form.Label>Change Location</Form.Label>
+                  <Form.Control type='text'
+                    placeholder={this.state.zip}
+                    onChange={e => this.updateZip(e)} />
+                </Form.Group>
                 </div>
 
-                <Form.Check
-                  type='checkbox'
-                  id='price filter'
-                  label='Price'
-                  name='filter-group'
-                  onClick={e => document.getElementById('price').classList.toggle('hide')}
-                />
-
-                <div id='price' class='hide'>
-                  <Form.Group className='mb-3' controlId='form-min-price'>
-                    <Form.Label>Min Price</Form.Label>
-                    <Form.Control name='price_min' type='text' placeholder='Enter Minimum Price' onChange={(event) => this.handleFilterChange(event)} />
-                  </Form.Group>
-                  <Form.Group className='mb-3' controlId='form-max-price'>
-                    <Form.Label>Max Price</Form.Label>
-                    <Form.Control name='price_max' type='text' placeholder='Enter Maximum Price' onChange={(event) => this.handleFilterChange(event)} />
-                  </Form.Group>
-                </div>
-
-                <Form.Check
-                  type='checkbox'
-                  id='availability filter'
-                  label='Availability'
-                  name='filter-group'
-                  onClick={e => document.getElementById('availability').classList.toggle('hide')}
-                />
-                <div id='availability' class='hide'>
-                  <Form.Group className='mb-3' controlId='form-min-day'>
-                    <Form.Label>Start Date</Form.Label>
-                    <Form.Control name='start_date' type='date' placeholder='Enter Start Date' onChange={(event) => this.handleDateChange(event)} />
-                  </Form.Group>
-                  <Form.Group className='mb-3' controlId='form-max-day'>
-                    <Form.Label>End Date</Form.Label>
-                    <Form.Control type='date' name='end_date' placeholder='Enter End Date' onChange={(event) => this.handleDateChange(event)} />
-                  </Form.Group>
-                </div>
-                <Button variant='primary' onClick={async () => { await this.populateListings() }} >
+                <Button variant='primary' id='search-button' disabled={(isNaN(this.state.zip)) || (this.state.zip.length !== 5)}
+                  onClick={async () => { await this.populateListings() }} >
                   Search
                 </Button>
               </div >
