@@ -13,17 +13,7 @@ export default class UserProfile extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      user: {
-        street1: '',
-        street2: '',
-        city: '',
-        state: '',
-        zip: '',
-        country: '',
-        name: '',
-        phone: '',
-        email: ''
-      },
+      user: this.props.user,
       oldData: {
         street1: '',
         street2: '',
@@ -40,41 +30,11 @@ export default class UserProfile extends Component {
     };
   }
 
-  componentDidMount() {
-    this.populateUserData();
-  }
-
-  async populateUserData() {
-    const user = getUser();
-    const token = getAccessToken();
-    if (user !== null && token != null) {
-      const config = {
-        headers: {
-          Authorization: "Bearer " + token
-        }
-      };
-
-      try {
-        const resp = await axios.get(`http://localhost:8000/users/${user.sub}`, config);
-        console.log(resp);
-        const userData = resp.data;
-        const address = userData.address;
-        this.setState({
-          user: {
-            email: userData.email,
-            name: userData.name,
-            phone: userData.phone,
-            street1: address.street1,
-            street2: address.street2,
-            city: address.city,
-            state: address.state,
-            zip: address.zip,
-            country: address.country
-          },
-        });
-      } catch(err) {
-        console.log(err);
-      }
+  componentDidUpdate(prevProps) {
+    if(this.props.user !== prevProps.user) {
+      this.setState({
+        user: this.props.user,
+      })
     }
   }
 

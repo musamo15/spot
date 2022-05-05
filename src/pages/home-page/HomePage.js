@@ -59,8 +59,8 @@ class HomePage extends Component {
         {this.state.listings.filter((item,idx) => idx < 4).map((listing)=>
             
           
-            <Carousel.Item interval={10000}
-            onClick={e => this.redirect(`/categories/tests/listings/${listing.id}`) }
+            <Carousel.Item key={listing.id} interval={10000}
+            onClick={e => this.redirect(`/categories/tests/listings/${listing.id}`) } 
             >
               <img
                 src='https://tesla-view.thron.com/api/xcontents/resources/delivery/getThumbnail/tesla/590x504/44ac2002-409d-42b4-8cdd-6e6cfe635d8d.jpg?v=47&dpr=200'
@@ -81,7 +81,7 @@ class HomePage extends Component {
         <h5>Popular Listings</h5>
         <div className='card-row'>
             {this.state.listings.map((listing) => (
-              <Card
+              <Card  key={listing.id} 
                 style={{ width: '14rem', cursor: 'pointer' }}
                 onClick={e => this.redirect(`/categories/tests/listings/${listing.id}`) }
               >
