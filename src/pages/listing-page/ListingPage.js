@@ -24,6 +24,7 @@ class ListingPage extends Component {
       title: '',
       price: '',
       attributes: '',
+      images: [],
       startDate: new Date(),
       endDate: new Date(),
       rentals: [],
@@ -40,7 +41,7 @@ class ListingPage extends Component {
     this.disableDates = this.disableDates.bind(this);
     this.handleRental = this.handleRental.bind(this);
     this.findMinDate = this.findMinDate.bind(this);
-   
+
   }
 
 
@@ -77,18 +78,18 @@ class ListingPage extends Component {
       {
         alert("Invalid date selected")
         this.setState({
-      
+
           rent_start_date: new Date(),
           rent_end_date: new Date()
         })
         window.location.reload(false)
-        return 
+        return
       }
 
     }
 
     this.setState({
-      
+
       rent_start_date: selectedStart,
       rent_end_date: selectedEnd
     })
@@ -99,7 +100,7 @@ class ListingPage extends Component {
     if (!isAuthenticated())
     {
       alert("You arent logged in!")
-      
+
     }
     else
     {
@@ -127,12 +128,12 @@ class ListingPage extends Component {
 
       const params = {
         category: this.props.params.category_id,
-        
+
         start_date: new Date(this.state.rent_start_date).toISOString(),
         end_date: new Date(this.state.rent_end_date).toISOString(),
         lessee_id: user.sub
       };
-      
+
       const token = getAccessToken();
       if (user !== null && token != null) {
         const config = {
@@ -141,7 +142,7 @@ class ListingPage extends Component {
           }
       }
       const requestbody = {}
-      const resp = await axios.put(`http://localhost:8000/listings/${this.props.params.listing_id}/rent?category=${params.category}&start_date=${params.start_date}&end_date=${params.end_date}&lessee_id=${params.lessee_id}`, requestbody, config )
+      await axios.put(`http://localhost:8000/listings/${this.props.params.listing_id}/rent?category=${params.category}&start_date=${params.start_date}&end_date=${params.end_date}&lessee_id=${params.lessee_id}`, requestbody, config )
       this.props.navigate("/profile")
     }
 
@@ -165,7 +166,7 @@ class ListingPage extends Component {
       {
         return true
       }
-      
+
 
     }
   }
@@ -184,6 +185,7 @@ class ListingPage extends Component {
         title: resp.data.item_name,
         price: resp.data.item_price,
         attributes: resp.data.attributes,
+        images: resp.data.images,
         startDate: new Date(resp.data.start_date),
         endDate: new Date(resp.data.end_date),
         rentals: resp.data.rentals,
@@ -235,7 +237,7 @@ class ListingPage extends Component {
       }
       if (this.state.host === user.sub) {
         axios.delete(`http://localhost:8000/listings/${this.props.params.listing_id}?category=${this.props.params.category_id}`, config).then(() => {console.log('Delete successful');})
-        this.redirect(`/profile`) 
+        this.redirect(`/profile`)
       }
       else {
         alert("You're not the owner of this listing")
@@ -272,30 +274,23 @@ class ListingPage extends Component {
           <div className='titles'>{this.state.title}</div>
           <div className='listing-row'>
             <Carousel className='mb-2' style={{ width: '800px' }} interval={null}>
-             <Carousel.Item>
-              <img
-                src='https://i.guim.co.uk/img/media/3547ba0f293eb4702bab2d2c1aed323d9f9a255a/1139_892_3139_1884/master/3139.jpg?width=1200&quality=85&auto=format&fit=max&s=e9f0fd94d7bd8d489a7de6b76b241397'
-                alt='Honda Type R'
-                width='800px'
-                height='400px'
-                style={{ 'objectFit': 'cover' }}
-              />
-            </Carousel.Item>
-            <Carousel.Item>
-              <img
-                src='https://cimg0.ibsrv.net/ibimg/hgm/1920x1080-1/100/609/2017-honda-civic-sdn_100609652.jpg'
-                alt='Honda Type R'
-                width='800px'
-                height='400px'
-                style={{ 'objectFit': 'cover' }}
-              />
-            </Carousel.Item>
+            {this.state.images.map(url =>
+              <Carousel.Item>
+                <img
+                  alt={url}
+                  src={url}
+                  width='800px'
+                  height='400px'
+                  style={{ 'objectFit': 'cover' }}
+                />
+              </Carousel.Item>
+            )}
           </Carousel>
           <div className='rent-options'>
           <div className={'edit mt-2'} id='rent-option-label'>Rent Options</div>
             <div>Price</div>
             <div className='price-per-day'><b>${this.state.price}</b>/ day</div>
-            
+
             <Calendar
               caldendarType = 'US'
               showNeighboringMonth = {false}

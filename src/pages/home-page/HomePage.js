@@ -37,7 +37,8 @@ class HomePage extends Component {
         listings.push({
           id: listing.listing_id,
           name: listing.item_name,
-          price: listing.item_price
+          price: listing.item_price,
+          images: listing.images
         })
 
       }
@@ -55,14 +56,12 @@ class HomePage extends Component {
       <div className='layout-container'>
         <Carousel className='mb-4'>
           {this.state.listings.filter((item, idx) => idx < 4).map((listing) =>
-
-
             <Carousel.Item key={listing.id} interval={10000}
               onClick={e => this.redirect(`/categories/tests/listings/${listing.id}`)}
             >
               <img
-                src='https://tesla-view.thron.com/api/xcontents/resources/delivery/getThumbnail/tesla/590x504/44ac2002-409d-42b4-8cdd-6e6cfe635d8d.jpg?v=47&dpr=200'
-                alt='Model S'
+                src={listing.images[0]}
+                alt={listing.images[0]}
                 width='1200px'
                 height='400px'
                 style={{ 'objectFit': 'cover' }}
@@ -85,8 +84,8 @@ class HomePage extends Component {
             >
               <Card.Img
                 variant='top'
-                src='https://tesla-view.thron.com/api/xcontents/resources/delivery/getThumbnail/tesla/590x504/44ac2002-409d-42b4-8cdd-6e6cfe635d8d.jpg?v=47&dpr=200'
-                alt='Model S'
+                src={listing.images[0]}
+                alt={listing.images[0]}
               />
               <Card.Body>
                 <Card.Title>{listing.name}</Card.Title>

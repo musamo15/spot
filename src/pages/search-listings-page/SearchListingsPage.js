@@ -34,27 +34,28 @@ class SearchListingsPage extends Component {
         }
         let mode = 'error'
         let formattedListings = []
-        
+
         try {
             const response = await axios.get('http://localhost:8000/search', { params: queryParams })
-    
+
             if (response.status === 200) {
-                
+
                 const listingsData = [...response.data]
-               
+
                 if(listingsData.length > 0) {
                     listingsData.map(
                         (listing) => formattedListings.push({
                             id: listing.listing_id,
                             name: listing.item_name,
                             price: listing.item_price,
+                            images: listing.images,
                             category: listing.category
                         })
                     )
                     mode = 'valid'
                 }
             }
-        }catch(error) {
+        } catch(error) {
             // If an error is hit during the api call show error message
         }
 

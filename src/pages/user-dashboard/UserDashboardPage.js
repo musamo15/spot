@@ -55,13 +55,14 @@ class UserDashboardPage extends Component {
         console.log(resp)
         const userData = resp.data;
         const address = userData.address;
-       
+
         let listings = [];
         for (const listing of resp.data.listings) {
           listings.push({
             id: listing.listing_id,
             name: listing.item_name,
             price: listing.item_price,
+            images: listing.images,
             category: listing.category
           });
         }
@@ -72,6 +73,7 @@ class UserDashboardPage extends Component {
             id: rental.listing_id,
             name: rental.item_name,
             price: rental.item_price,
+            images: rental.images,
             category: rental.category
           });
         }
@@ -125,7 +127,7 @@ class UserDashboardPage extends Component {
             <Tab eventKey="loaning" title="Loaning">
               <br />
               <h1>Loaning</h1>
-              
+
               <ListingRow mode={'valid'} listings={this.state.listings} header="" noListingsMessage='Unable to find listings' />
             </Tab>
 

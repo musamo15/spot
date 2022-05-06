@@ -44,14 +44,6 @@ class CategoryPage extends Component {
     this.populateListings();
   }
 
-  // componentDidUpdate(prevProps, prevState) {
-  //   if (prevState.filters !== this.state.filters ||
-  //     prevState.sortedOn !== this.state.sortedOn) {
-  //     //Make new API call
-  //     this.populateListings();
-  //   }
-  // }
-
   async populateListings() {
 
     const params = {
@@ -70,6 +62,7 @@ class CategoryPage extends Component {
           id: listing.listing_id,
           name: listing.item_name,
           price: listing.item_price,
+          images: listing.images,
           distance: listing.distance
         });
       }
@@ -160,7 +153,7 @@ class CategoryPage extends Component {
         <div className='whole-category-page-container'>
           <NavDropdown title='Sort & Filter' id='sorts-and-filters'>
             <Form>
-              <div key={'radio'} className='mb-3'>
+              <div key={'radio'} className='mb-3 px-3'>
                 <p id='sort'>Sort By:</p>
                 <Form.Check
                   type='radio'
@@ -188,35 +181,35 @@ class CategoryPage extends Component {
 
                 <p id='filter'>Filter By:</p>
                 <div id='price'>
-                  <Form.Group className='mb-3' controlId='form-min-price'>
+                  <Form.Group className='mb-3 px-3' controlId='form-min-price'>
                     <Form.Label>Min Price</Form.Label>
                     <Form.Control name='price_min' type='text' placeholder='' onChange={(event) => this.handleFilterChange(event)} />
                   </Form.Group>
-            
-                  <Form.Group className='mb-3' controlId='form-max-price'>
+
+                  <Form.Group className='mb-3 px-3' controlId='form-max-price'>
                     <Form.Label>Max Price</Form.Label>
                     <Form.Control name='price_max' type='text' placeholder='' onChange={(event) => this.handleFilterChange(event)} />
                   </Form.Group>
                 </div>
 
                 <div id='availability' >
-                  <Form.Group className='mb-3' controlId='form-min-day'>
+                  <Form.Group className='mb-3 px-3' controlId='form-min-day'>
                     <Form.Label>Availability Start Date</Form.Label>
                     <Form.Control name='start_date' type='date' placeholder='Enter Start Date' onChange={(event) => this.handleDateChange(event)} />
                   </Form.Group>
-                  <Form.Group className='mb-3' controlId='form-max-day'>
+                  <Form.Group className='mb-3 px-3' controlId='form-max-day'>
                     <Form.Label>Availability End Date</Form.Label>
                     <Form.Control type='date' name='end_date' placeholder='Enter End Date' onChange={(event) => this.handleDateChange(event)} />
                   </Form.Group>
                 </div>
 
                 <div id='distance' >
-                  <Form.Group className='mb-3' controlId='form-max-distance'>
+                  <Form.Group className='mb-3 px-3' controlId='form-max-distance'>
                     <Form.Label>Max Distance</Form.Label>
                     <Form.Control name='distance' type='text' placeholder='Enter Maximum Distance' defaultValue={this.state.filters.price_max} onChange={(event) => this.handleFilterChange(event)} />
                   </Form.Group>
 
-                <Form.Group className='mb-3'>
+                <Form.Group className='mb-3 px-3'>
                   <Form.Label>Change Location</Form.Label>
                   <Form.Control type='text'
                     placeholder={this.state.zip}
@@ -242,8 +235,8 @@ class CategoryPage extends Component {
                 >
                   <Card.Img
                     variant='top'
-                    src='https://tesla-view.thron.com/api/xcontents/resources/delivery/getThumbnail/tesla/590x504/44ac2002-409d-42b4-8cdd-6e6cfe635d8d.jpg?v=47&dpr=200'
-                    alt='Model S'
+                    src={listing.images[0]}
+                    alt={listing.images[0]}
                   />
                   <Card.Body>
                     <Card.Title>{listing.name}</Card.Title>
