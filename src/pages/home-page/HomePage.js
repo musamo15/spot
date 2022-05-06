@@ -95,43 +95,7 @@ class HomePage extends Component {
             </Card>
           ))}
         </div>
-        <div className="tutorial">
-          <h3 className='how-to'><b>How to use SPOT</b></h3>
-          <div className="tutorial-item">
-            <Card
-              style={{ width: '20rem', cursor: 'pointer' }}
-              onClick={e => this.redirect(`/login`)}
-            >
-              <Card.Img
-                variant='top'
-                src='https://www.iconpacks.net/icons/1/free-user-login-icon-305-thumb.png'
-                alt='Model S'
-              />
-              <Card.Body className='cardbody'>
-                <Card.Title>Register or Login</Card.Title>
-                <Card.Text>Get started by registering an account or if you already have one, log in!</Card.Text>
-              </Card.Body>
-            </Card>
-
-            <Card
-              style={{ width: '20rem', cursor: 'pointer' }}
-              onClick={e => this.redirect(`/login`)}
-            >
-              <Card.Img
-                variant='top'
-                src='https://icons.iconarchive.com/icons/cornmanthe3rd/squareplex/512/Utilities-google-calendar-icon.png'
-                alt='Model S'
-              />
-              <Card.Body className='cardbody'>
-                <Card.Title>Choose a Date</Card.Title>
-                <Card.Text>Pick the days for which you want to rent an item.</Card.Text>
-              </Card.Body>
-            </Card>
-          </div>
-        </div>
-
       </div>
-
     );
   }
 

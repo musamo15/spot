@@ -84,7 +84,7 @@ class ListingForm extends Component {
       };
 
       const info = {
-        host_id: "",
+        host_id: user.sub,
         category: this.state.category,
         item_name: this.state.item_name,
         item_price: this.state.item_price,
@@ -120,7 +120,7 @@ class ListingForm extends Component {
         }
       };
       const info = {
-        host_id: "",
+        host_id: user.sub,
         item_price: this.state.item_price,
         start_date: this.state.start_date,
         end_date: this.state.end_date,
