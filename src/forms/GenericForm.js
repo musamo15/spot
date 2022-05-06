@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 
 import Button from 'react-bootstrap/Button';
+import Col from 'react-bootstrap/Col';
+import Form from 'react-bootstrap/Form';
+import Row from 'react-bootstrap/Row';
 
 export default class GenericForm extends Component {
 
@@ -32,52 +35,68 @@ export default class GenericForm extends Component {
 
   render() {
     return (
-      <div>
-        <form>
-          {this.state.item.map((input, index) => {
-            if(index === 0) {
-              return (
-                <div key={index}>
-                  <div>
-                    <label>Attribute</label>
-                    <label>Value</label>
-                  </div>
-                  <input
-                    name='itemAttribute'
-                    placeholder='Enter Item Attribute'
-                    value={input.itemAttribute}
-                    onChange = {event => this.handleFormChange(index, event)}
-                  />
-                  <input
-                    name='itemAttributeValue'
-                    placeholder='Enter Item Attribute Value'
-                    value={input.itemAttributeValue}
-                    onChange = {event => this.handleFormChange(index, event)}
-                  />
-                </div>
-              );
-            } else {
-              return (
-                <div key={index}>
-                  <input
-                    name='itemAttribute'
-                    placeholder='Enter Item Attribute'
-                    value={input.itemAttribute}
-                    onChange = {event => this.handleFormChange(index, event)}
-                  />
-                  <input
-                    name='itemAttributeValue'
-                    placeholder='Enter Item Attribute Value'
-                    value={input.itemAttributeValue}
-                    onChange = {event => this.handleFormChange(index, event)}
-                  />
-                  <Button variant='primary' size='sm' onClick={(event) => this.removeFields(index, event)}>Remove</Button>
-                </div>
-              );
-            }
-          })}
-          <Button variant='primary' size='sm' onClick={this.addFields}>Add More..</Button>
-        </form>
+      <div className='mb-3'>
+        {this.state.item.map((input, index) => {
+          if(index === 0) {
+            return (
+              <div className='mb-3' key={index}>
+                <Row>
+                  <Col>
+                    <Form.Label>Attributes</Form.Label>
+                    <Form.Control
+                      type='text'
+                      name='itemAttribute'
+                      placeholder='Enter Item Attribute'
+                      value={input.itemAttribute}
+                      onChange = {event => this.handleFormChange(index, event)}
+                    />
+                  </Col>
+                  <Col>
+                    <Form.Label>Values</Form.Label>
+                    <Form.Control
+                      type='text'
+                      name='itemAttributeValue'
+                      placeholder='Enter Item Attribute Value'
+                      value={input.itemAttributeValue}
+                      onChange = {event => this.handleFormChange(index, event)}
+                    />
+                  </Col>
+                  <Col>
+                  </Col>
+                </Row>
+              </div>
+            );
+          } else {
+            return (
+              <div className='mb-3' key={index}>
+                <Row>
+                  <Col>
+                    <Form.Control
+                      type='text'
+                      name='itemAttribute'
+                      placeholder='Enter Item Attribute'
+                      value={input.itemAttribute}
+                      onChange = {event => this.handleFormChange(index, event)}
+                    />
+                  </Col>
+                  <Col>
+                    <Form.Control
+                      type='text'
+                      name='itemAttributeValue'
+                      placeholder='Enter Item Attribute Value'
+                      value={input.itemAttributeValue}
+                      onChange = {event => this.handleFormChange(index, event)}
+                    />
+                  </Col>
+                  <Col>
+                    <Button variant='primary' size='sm' onClick={(event) => this.removeFields(index, event)}>Remove</Button>
+                  </Col>
+                </Row>
+              </div>
+            );
+          }
+        })}
+        <Button variant='primary' onClick={this.addFields}>Add Attribute</Button>
       </div>
     );
   }

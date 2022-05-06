@@ -53,7 +53,7 @@ class ListingRow extends Component {
                         onClick={e => this.redirect(`/categories/${listing.category}/listings/${listing.id}`)}>
                         <Card.Img
                             variant='top'
-                            src='https://tesla-view.thron.com/api/xcontents/resources/delivery/getThumbnail/tesla/590x504/44ac2002-409d-42b4-8cdd-6e6cfe635d8d.jpg?v=47&dpr=200'
+                            src={listing.images[0]}
                             alt='Model S'
                         />
                         <Card.Body>
